@@ -5,18 +5,24 @@ import java.sql.*;
 public class JdbcConnection {
     public static void operate() throws SQLException {
         Connection connection = DriverManager.getConnection("jdbc:h2:./toDo;AUTO_SERVER=TRUE");
-        String sqlCreate = "CREATE TABLE IF NOT EXISTS Task (id identity primary key , name varchar)";
         var statement = connection.createStatement();
+
+
+        // ===========  CREATING A NEW TABLE  ==================
+        String sqlCreate = "CREATE TABLE IF NOT EXISTS Task (id identity primary key , name varchar)";
         statement.execute(sqlCreate);
 
+        // ======= INSERTING VALUES INTO THE TABLE ========
         String sqlInsert = "INSERT INTO Task (name) VALUES ('Learn Java !')";
         statement.execute(sqlInsert);
 
+        // ==============  DYNAMIC INSERTION INTO TABLE  ==============
         String dynamicInsert = "INSERT INTO Task (name) VALUES (?)";
         PreparedStatement ps = connection.prepareStatement(dynamicInsert);
         ps.setString(1, "Learn Spring!");
         ps.executeUpdate();
 
+        // ==========  UPDATING THE EXITING ROWS (NAME)  ===========
         String updateStatement = "UPDATE Task SET name = ?  WHERE name = 'Learn Java !'";
         ps = connection.prepareStatement(updateStatement);
         ps.setString(1, "Jakarta EE!");

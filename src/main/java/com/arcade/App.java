@@ -1,11 +1,10 @@
-import com.arcade.JdbcConnection;
-
-import java.sql.SQLException;
+import com.arcade.Task;
+import com.arcade.TaskRepository;
 
 void main(){
     try {
-        JdbcConnection.operate();
-    } catch (SQLException e) {
+        TaskRepository.create(new Task("Going to gym!"));
+    } catch (Exception e) {
         throw new RuntimeException(e);
     }
 }
