@@ -16,6 +16,9 @@ public class Task {
         this.id = id;
     }
 
+    public Task(int anInt, String string) {
+    }
+
     public String getName() {
         return name;
     }
